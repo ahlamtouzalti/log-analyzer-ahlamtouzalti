@@ -10,7 +10,7 @@ pipeline {
         
         stage('Analyze') {
             steps {
-                sh 'python3 log_analyzer.py'
+                sh 'python log_analyzer.py'
             }
         }
         
