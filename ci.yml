@@ -1,0 +1,40 @@
+import sys
+from colorama import init, Fore
+
+init()
+
+def analyze_log(file_path):
+    error_count = 0
+    warning_count = 0
+    info_count = 0
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                if 'ERROR' in line:
+                    error_count += 1
+                elif 'WARNING' in line:
+                    warning_count += 1
+                elif 'INFO' in line:
+                    info_count += 1
+        return error_count, warning_count, info_count
+    except FileNotFoundError:
+        print(f"{Fore.RED}Erreur : Le fichier {file_path} n'a pas été trouvé.{Fore.RESET}")
+        return 0, 0, 0
+
+def generate_report(error, warning, info):
+    with open('rapport.txt', 'w') as report:
+        report.write(f"Statistiques :\n")
+        report.write(f"ERROR : {error}\n")
+        report.write(f"WARNING : {warning}\n")
+        report.write(f"INFO : {info}\n")
+    print(f"{Fore.RED}ERROR : {error}{Fore.RESET}")
+    print(f"{Fore.YELLOW}WARNING : {warning}{Fore.RESET}")
+    print(f"{Fore.GREEN}INFO : {info}{Fore.RESET}")
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        file_path = sys.argv[1]
+    else:
+        file_path = 'log.txt'
+    errors, warnings, infos = analyze_log(file_path)
+    generate_report(errors, warnings, infos)
