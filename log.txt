@@ -1,0 +1,5 @@
+INFO: Système démarré
+ERROR: Problème réseau
+WARNING: Mémoire faible
+INFO: Tâche exécutée
+ERROR: Connexion refusée
